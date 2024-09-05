@@ -1,0 +1,23 @@
+.user-name {
+  font-weight: bold;
+  color: #14f;
+}
+.user-email {
+  color: #333;
+}
+.inactive .user-name,
+.inactive .user-email {
+  color: #999;
+}
+
+.additional-info small {
+  color: #666;
+}
+
+.inactive .additional-info small {
+  color: #aaa;
+}
+
+input {
+  width: 100%;
+}
