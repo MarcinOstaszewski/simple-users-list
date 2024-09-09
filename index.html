@@ -14,12 +14,11 @@
   <div class="container">
     <main>
       <div class="row">
-        <div class="mt-4 text-center">
+        <div class="mt-4">
           <h1>Basic Users List CRUD App</h1>
-          <small class="text-center">
-            Simple JS app to manage a list of users, fetched from an open API, and stored in LocalStorage after each
-            change.</br>
-            Styled with Bootstrap
+          <small>
+            Simple JS app to manage a list of users, fetched from an API, and stored in LocalStorage after each
+            change.
           </small>
         </div>
 
@@ -31,36 +30,45 @@
           <div class="row col-md-12 col-lg-3 mt-4 mt-lg-0">
             <form class="d-flex flex-column" id="newUserForm">
               <div class="d-flex flex-wrap flex-lg-column">
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1">
+                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
                   <label for="userName">User name:
                   </label>
                     <input type="text" name="userName" id="userName" class="form-control">
                 </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1">
+                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
                   <label for="userEmail">User email:
                   </label>
                     <input type="email" name="userEmail" id="userEmail" class="form-control">
                 </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1">
+                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
                   <label for="userCompany">User company:
                   </label>
                     <input type="text" name="userCompany" id="userCompany" class="form-control">
                 </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1">
+                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
                   <label for="userWebsite">User website:
                   </label>
                     <input type="text" name="userWebsite" id="userWebsite" class="form-control">
                 </div>
               </div>
-              <button id="addNewUser" type="button" class="btn btn-md btn-outline-info mt-3">Add new user</button>
+              <div class="px-2">
+              <button id="addUserButton" type="button" class="btn btn-md btn-outline-info mt-3">Add new user</button>
+              </div>
             </form>
           </div>
         </div>
       </div>
     </main>
 
-    <footer class="container my-3">
-      <p>By MarcinOstaszewski 2024</p>
+    <dialog class="customDialog" id="loadedFromMemory">
+      <h6>The users list was loaded from browser's memory<span>&times;</span></h6>
+    </dialog>
+    <dialog class="customDialog" id="loadedFromServer">
+      <h6>No info in browser's memory</br>New list of users was fetched from server.<span>&times;</span></h6>
+    </dialog>
+
+    <footer class="container my-3 d-flex justify-content-end">
+      <small>Styled with Bootstrap</small>
     </footer>
   </div>
 

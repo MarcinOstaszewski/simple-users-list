@@ -18,6 +18,35 @@
   color: #aaa;
 }
 
+label {
+  margin-left: 0.5rem;
+}
 input {
   width: 100%;
+}
+.customDialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.customDialog span {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.customDialog h6 {
+  background-color: #f8f8f8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ddd;
+  padding: 2rem 4rem;
+  border-radius: 0.5rem;
 }
