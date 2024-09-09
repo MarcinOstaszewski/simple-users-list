@@ -68,22 +68,22 @@ function displayUsers() {
     const isActive = user.active;
     
     const li = document.createElement('li');
-    li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center',  isActive ? '-' : 'inactive');
+    li.classList.add('list-group-item', 'd-flex', 'flex-wrap', 'justify-content-between', 'align-items-center',  isActive ? '-' : 'inactive');
     li.innerHTML = `
-      <div class="col-4 col-md-5 d-flex flex-column user-name-email">
+      <div class="col-6 col-sm-4 col-md-5 d-flex flex-column user-name-email">
         <div class="user-name">${user.name}</div>
         <small class="user-email">${user.email?.toLowerCase()}</small>
       </div>
-      <div class="col-4 col-md-5 d-flex flex-column text-xs additional-info">
+      <div class="col-6 col-sm-4 col-md-5 d-flex flex-column text-xs additional-info">
         <small>company: ${user?.company?.name}</small>
         <small>website: <span>${user.website}</small>
       </div>
-      <div class="col-4 col-md-2 col-xl-2">
-        <div class="d-flex flex-column gap-1">
+      <div class="col-12 col-sm-4 col-md-2 col-xl-2 mt-2 mt-sm-0">
+        <div class="d-flex flex-sm-column gap-1 justify-content-end">
           <button class="btn btn-outline-primary btn-sm mr-2" id="swap-user-status" onclick="swapUserStatus.call(null, ${index})">
             ${isActive ? 'Desactivate' : 'Activate'}
           </button>
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between gap-1">
             <button class="btn btn-outline-dark btn-sm" id="edit-user" onclick="editUser.call(null, ${index})">Edit</button>
             <button class="btn btn-outline-danger btn-sm" id="delete-user" onclick="deleteUser.call(null, ${index})">Delete</button>
           </div>
@@ -114,7 +114,7 @@ function addUser() {
     company: {
       name: formData?.userCompany?.value
     },
-    website: formData?.website?.value,
+    website: formData?.userWebsite?.value,
     active: false
   };
   usersList.push(newUser);

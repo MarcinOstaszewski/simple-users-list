@@ -1,3 +1,4 @@
+/* FORM */
 .user-name {
   font-weight: bold;
   color: #14f;
@@ -26,6 +27,29 @@ input {
   width: 100%;
 }
 
+/* NOTIFICATION */
+.customNotification {
+  cursor: pointer;
+  position: fixed;
+  bottom: -100px;
+  right: 0;
+  padding: 1rem;
+  background-color: #0d6efd;
+  color: #fff;
+  z-index: 9999;
+  border-radius: 12px 12px 0 0;
+  transition: bottom 0.5s;
+  animation: slidein 4s;
+}
+
+@keyframes slidein {
+  0% { bottom: -100px; }
+  33% { bottom: 0; }
+  90% { bottom: 0; }
+  100% { bottom: -100px; }
+}
+
+/* MODAL */
 .customDialog {
   position: fixed;
   cursor: pointer;
@@ -38,20 +62,22 @@ input {
 
 .customDialog span {
   position: absolute;
-  top: 5px;
+  top: 0;
   right: 10px;
   cursor: pointer;
 }
 
-.customDialog h6 {
+.customDialog .content {
   background-color: #f8f8f8;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid #ddd;
+  border: 2px solid #e00;
   padding: 2rem 4rem;
+  background-color: #fff;
   border-radius: 0.5rem;
+  color: #e00;
 }
 
 .buttons-column {

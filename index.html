@@ -13,11 +13,11 @@
 <body class="bg-light">
   <div class="container">
     <main>
-      <div class="mt-4 d-flex justify-content-end">
+      <div class="mt-4 mb-2 d-flex justify-content-end">
         <div id="resetUsersListButton" class="btn btn-sm btn-outline-danger">Fetch new Users List from server</div>
       </div>
       <div class="row">
-        <div class="mt-2">
+        <div class="mb-4">
           <h1>RWD, CRUD Users List App</h1>
           <small>
             Basic JS app to manage a list of users, fetched from an API, and stored in LocalStorage after each
@@ -25,57 +25,56 @@
           </small>
         </div>
 
-        <div class="row g-5 mt-4">
-          <div class="row col-md-12 col-lg-9">
-            <ul id="usersList" class="list-group"></ul>
-          </div>
+        <div class="row col-md-12 col-lg-9">
+          <ul id="usersList" class="list-group"></ul>
+        </div>
 
-          <div class="row col-md-12 col-lg-3 mt-4 mt-lg-0">
-            <form class="d-flex flex-column" id="newUserForm">
-              <div class="d-flex flex-wrap flex-lg-column">
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
-                  <label for="userName">User name:
-                  </label>
-                    <input type="text" name="userName" id="userName" class="form-control">
-                </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
-                  <label for="userEmail">User email:
-                  </label>
-                    <input type="email" name="userEmail" id="userEmail" class="form-control">
-                </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
-                  <label for="userCompany">User company:
-                  </label>
-                    <input type="text" name="userCompany" id="userCompany" class="form-control">
-                </div>
-                <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
-                  <label for="userWebsite">User website:
-                  </label>
-                    <input type="text" name="userWebsite" id="userWebsite" class="form-control">
-                </div>
+        <div class="row col-md-12 col-lg-3 mt-4 mt-lg-0">
+          <form class="d-flex flex-column" id="newUserForm">
+            <div class="d-flex flex-wrap flex-lg-column">
+              <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
+                <label for="userName">User name:
+                </label>
+                <input type="text" name="userName" id="userName" class="form-control">
               </div>
-              <div class="px-1 d-flex justify-content-end">
-              <button id="addNewUserButton" type="button" class="btn btn-md btn-outline-info mt-3">Add user</button>
-              <button id="saveChangesButton" type="button" class="btn btn-md btn-outline-info mt-3 d-none">Save changes</button>
+              <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
+                <label for="userEmail">User email:
+                </label>
+                <input type="email" name="userEmail" id="userEmail" class="form-control">
               </div>
-            </form>
-          </div>
+              <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
+                <label for="userCompany">User company:
+                </label>
+                <input type="text" name="userCompany" id="userCompany" class="form-control">
+              </div>
+              <div class="form-control-group col-12 col-sm-6 col-lg-12 px-1 mt-2">
+                <label for="userWebsite">User website:
+                </label>
+                <input type="text" name="userWebsite" id="userWebsite" class="form-control">
+              </div>
+            </div>
+            <div class="px-1 d-flex justify-content-end">
+              <button id="addNewUserButton" type="button" class="btn btn-md btn-outline-primary mt-3">Add user</button>
+              <button id="saveChangesButton" type="button" class="btn btn-md btn-outline-primary mt-3 d-none">Save
+                changes</button>
+            </div>
+          </form>
         </div>
       </div>
     </main>
 
-    <dialog class="customDialog" id="loadedFromMemory">
-      <h6>Users list loaded from browser's memory<span>&times;</span></h6>
+    <dialog class="customNotification" id="loadedFromMemory">
+      <h6>Users list loaded from browser's memory</h6>
     </dialog>
-    <dialog class="customDialog" id="loadedFromServer">
-      <h6>New list of users <strong>fetched from server.</strong><span>&times;</span></h6>
+    <dialog class="customNotification" id="loadedFromServer">
+      <h6>New list of users <strong>fetched from server.</strong></h6>
     </dialog>
     <dialog class="customDialog dialog-danger" id="resetUsersList">
-      <div>
-        <h6 class="bg-warning text-white">
-          Are you sure?</br>This will reset current Users List.<span>&times;</span>
-          <button id="confirmReset" class="btn btn-outline-danger btn-sm mt-5">Reset Users List</button>
-        </h6>
+      <div class="content">
+        <span>&times;</span>
+        <h5>Are you sure?</h5>
+        <h6>This will reset current Users List.</h6>
+        <button id="confirmReset" class="btn btn-outline-danger btn-sm mt-4">Reset Users List</button>
       </div>
     </dialog>
 
