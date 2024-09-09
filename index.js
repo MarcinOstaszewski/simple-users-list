@@ -1,7 +1,8 @@
 const resetUsersListButton = document.getElementById('resetUsersListButton');
+const addNewUserButton = document.getElementById('addNewUserButton');
+const saveChangesButton = document.getElementById('saveChangesButton');
 const confirmReset = document.getElementById('confirmReset');
 const list = document.getElementById('usersList');
-const addUserButton = document.getElementById('addUserButton');
 const nameInput = document.getElementById('userName');
 const emailInput = document.getElementById('userEmail');
 const companyInput = document.getElementById('userCompany');
@@ -9,10 +10,20 @@ const websiteInput = document.getElementById('userWebsite');
 const fromMemoryDialog = document.getElementById('loadedFromMemory');
 const fromServerDialog = document.getElementById('loadedFromServer');
 const resetUsersListDialog = document.getElementById('resetUsersList');
-
 const newUserForm = document.getElementById('newUserForm');
 
 let usersList = [];
+let editedUserIndex = null;
+
+function updateAddSaveButtonVisible(value) {
+  if (value === "save") {
+    addNewUserButton.classList.add('d-none');
+    saveChangesButton.classList.remove('d-none');
+  } else if (value === "add") {
+    addNewUserButton.classList.remove('d-none');
+    saveChangesButton.classList.add('d-none');
+  } 
+}
 
 async function getUsers() {
   const response = await fetch('https://jsonplaceholder.typicode.com/users');
@@ -22,7 +33,16 @@ async function getUsers() {
 
 function createUsersList(users) {
   usersList = users.map(user => ({...user, active: true}));
-  console.log(usersList);
+}
+
+const editUser = (index) => {
+  editedUserIndex = index;
+  updateAddSaveButtonVisible("save");
+  const editedUser = usersList[index];
+  nameInput.value = editedUser.name;
+  emailInput.value = editedUser.email;
+  companyInput.value = editedUser.company.name;
+  websiteInput.value = editedUser.website;
 }
 
 const deleteUser = (index) => {
@@ -36,6 +56,7 @@ const swapUserStatus = (index) => {
 }
 
 function displayUsers() {
+  resetInputs();
   usersList.length && saveUsersListToLocalStorage();
   list.innerHTML = '';
   if (usersList.length === 0) {
@@ -49,20 +70,23 @@ function displayUsers() {
     const li = document.createElement('li');
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center',  isActive ? '-' : 'inactive');
     li.innerHTML = `
-      <div class="col-5 d-flex flex-column user-name-email">
+      <div class="col-4 col-md-5 d-flex flex-column user-name-email">
         <div class="user-name">${user.name}</div>
         <small class="user-email">${user.email?.toLowerCase()}</small>
       </div>
-      <div class="col-4 col-xl-5 d-flex flex-column text-xs additional-info">
+      <div class="col-4 col-md-5 d-flex flex-column text-xs additional-info">
         <small>company: ${user?.company?.name}</small>
         <small>website: <span>${user.website}</small>
       </div>
-      <div class="col-3 col-xl-2">
-        <div class="d-flex justify-content-between">
+      <div class="col-4 col-md-2 col-xl-2">
+        <div class="d-flex flex-column gap-1">
           <button class="btn btn-outline-primary btn-sm mr-2" id="swap-user-status" onclick="swapUserStatus.call(null, ${index})">
             ${isActive ? 'Desactivate' : 'Activate'}
           </button>
-          <button class="btn btn-outline-danger btn-sm" id="delete-user" onclick="deleteUser.call(null, ${index})">&times;</button>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-outline-dark btn-sm" id="edit-user" onclick="editUser.call(null, ${index})">Edit</button>
+            <button class="btn btn-outline-danger btn-sm" id="delete-user" onclick="deleteUser.call(null, ${index})">Delete</button>
+          </div>
         </div>
       </div>
     `;
@@ -78,27 +102,46 @@ function resetInputs() {
 };
 
 function saveUsersListToLocalStorage() {
-  console.log('from saveUsersListToLocalStorage', usersList)
   localStorage.setItem('usersList', JSON.stringify(usersList));
 }
 
-function addUser(user) {
-  usersList.push(user);
-  resetInputs();
-  displayUsers();
-}
-
-addUserButton.addEventListener('click', () => {
+function addUser() {
+  // TODO add validation !!!
   const formData = newUserForm.elements;
   const newUser = {
     name: formData?.userName?.value,
     email: formData?.userEmail?.value,
-    company: formData?.company?.name?.value,
+    company: {
+      name: formData?.userCompany?.value
+    },
     website: formData?.website?.value,
     active: false
   };
-  addUser(newUser);
-});
+  usersList.push(newUser);
+  displayUsers();
+}
+
+function saveUserData() {
+  // TODO add validation !!!
+  const formData = newUserForm.elements;
+  const updatedUser = {
+    name: formData?.userName?.value,
+    email: formData?.userEmail?.value,
+    company: {
+      ...formData.company,
+      name: formData?.userCompany?.value
+    },
+    website: formData?.userWebsite?.value,
+    active: usersList[editedUserIndex].active
+  };
+  usersList.splice(editedUserIndex, 1, updatedUser);
+  updateAddSaveButtonVisible("add");
+  displayUsers();
+  editedUserIndex = null;
+}
+
+addNewUserButton.addEventListener('click', addUser);
+saveChangesButton.addEventListener('click', saveUserData);
 
 resetUsersListButton.addEventListener('click', () => {
   resetUsersListDialog.show();
@@ -130,6 +173,7 @@ function fetchUsers() {
 };
 
 function initApp() {
+  updateAddSaveButtonVisible("add");
   let listFromStorage = localStorage.getItem('usersList');
   if (listFromStorage?.length) {listFromStorage = JSON.parse(listFromStorage)};
   if (listFromStorage.length) {
