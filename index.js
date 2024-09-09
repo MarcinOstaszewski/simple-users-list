@@ -190,8 +190,8 @@ function showNotification(message) {
 function initApp() {
   updateAddSaveButtonVisible("add");
   let listFromStorage = localStorage.getItem('usersList');
-  if (listFromStorage?.length) {listFromStorage = JSON.parse(listFromStorage)};
-  if (listFromStorage.length) {
+  if (listFromStorage?.length) {
+    listFromStorage = JSON.parse(listFromStorage);
     usersList = listFromStorage;
     displayUsers();
     showNotification(messages.fromMemory);
