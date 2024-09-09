@@ -7,10 +7,17 @@ const nameInput = document.getElementById('userName');
 const emailInput = document.getElementById('userEmail');
 const companyInput = document.getElementById('userCompany');
 const websiteInput = document.getElementById('userWebsite');
-const fromMemoryDialog = document.getElementById('loadedFromMemory');
-const fromServerDialog = document.getElementById('loadedFromServer');
+const customNotification = document.getElementsByClassName('customNotification')[0];
 const resetUsersListDialog = document.getElementById('resetUsersList');
 const newUserForm = document.getElementById('newUserForm');
+
+const messages = {
+  fromMemory: "Users list loaded from browser's memory.",
+  fromServer: "New list of users fetched from server.",
+  userAdded: "New user added to the list.",
+  userUpdated: "Updated user data.",
+  userDeleted: "User deleted from the list."
+}
 
 let usersList = [];
 let editedUserIndex = null;
@@ -48,6 +55,7 @@ const editUser = (index) => {
 const deleteUser = (index) => {
   usersList.splice(index, 1);
   displayUsers();
+  showNotification(messages.userDeleted);
 }
 
 const swapUserStatus = (index) => {
@@ -119,6 +127,7 @@ function addUser() {
   };
   usersList.push(newUser);
   displayUsers();
+  showNotification(messages.userAdded);
 }
 
 function saveUserData() {
@@ -137,6 +146,7 @@ function saveUserData() {
   usersList.splice(editedUserIndex, 1, updatedUser);
   updateAddSaveButtonVisible("add");
   displayUsers();
+  showNotification(messages.userUpdated);
   editedUserIndex = null;
 }
 
@@ -155,22 +165,27 @@ resetUsersListDialog.addEventListener('click', () => {
   resetUsersListDialog.close();
 });
 
-fromMemoryDialog.addEventListener('click', () => {
-  fromMemoryDialog.close();
-});
-
-fromServerDialog.addEventListener('click', () => {
-  fromServerDialog.close();
+customNotification.addEventListener('click', () => {
+  customNotification.close();
 });
 
 function fetchUsers() {
   getUsers().then(users => {
     usersList = [];
     createUsersList(users);
-    fromServerDialog.show();
+    showNotification(messages.fromServer);
     displayUsers();  
   });
 };
+
+function showNotification(message) {
+  const header = customNotification.querySelector('h6');
+  header.innerHTML = message;
+  customNotification.show();
+  setTimeout(() => {
+    customNotification.close();
+  }, 4500);
+}
 
 function initApp() {
   updateAddSaveButtonVisible("add");
@@ -179,7 +194,7 @@ function initApp() {
   if (listFromStorage.length) {
     usersList = listFromStorage;
     displayUsers();
-    fromMemoryDialog.show();
+    showNotification(messages.fromMemory);
   } else {
     displayUsers();
     fetchUsers();

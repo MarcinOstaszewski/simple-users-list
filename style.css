@@ -36,16 +36,16 @@ input {
   padding: 1rem;
   background-color: #0d6efd;
   color: #fff;
-  z-index: 9999;
+  z-index: 100;
   border-radius: 12px 12px 0 0;
   transition: bottom 0.5s;
-  animation: slidein 4s;
+  animation: slideIn 4s;
 }
 
-@keyframes slidein {
+@keyframes slideIn {
   0% { bottom: -100px; }
-  33% { bottom: 0; }
-  90% { bottom: 0; }
+  33% { bottom: -10px; }
+  90% { bottom: -10px; }
   100% { bottom: -100px; }
 }
 
