@@ -21,11 +21,14 @@
 label {
   margin-left: 0.5rem;
 }
+
 input {
   width: 100%;
 }
+
 .customDialog {
   position: fixed;
+  cursor: pointer;
   top: 0;
   left: 0;
   width: 100%;

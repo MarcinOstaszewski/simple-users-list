@@ -1,3 +1,5 @@
+const resetUsersListButton = document.getElementById('resetUsersListButton');
+const confirmReset = document.getElementById('confirmReset');
 const list = document.getElementById('usersList');
 const addUserButton = document.getElementById('addUserButton');
 const nameInput = document.getElementById('userName');
@@ -6,6 +8,7 @@ const companyInput = document.getElementById('userCompany');
 const websiteInput = document.getElementById('userWebsite');
 const fromMemoryDialog = document.getElementById('loadedFromMemory');
 const fromServerDialog = document.getElementById('loadedFromServer');
+const resetUsersListDialog = document.getElementById('resetUsersList');
 
 const newUserForm = document.getElementById('newUserForm');
 
@@ -95,6 +98,18 @@ addUserButton.addEventListener('click', () => {
     active: false
   };
   addUser(newUser);
+});
+
+resetUsersListButton.addEventListener('click', () => {
+  resetUsersListDialog.show();
+});
+
+confirmReset.addEventListener('click', () => {
+  fetchUsers();
+});
+
+resetUsersListDialog.addEventListener('click', () => {
+  resetUsersListDialog.close();
 });
 
 fromMemoryDialog.addEventListener('click', () => {

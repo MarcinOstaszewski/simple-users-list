@@ -13,11 +13,14 @@
 <body class="bg-light">
   <div class="container">
     <main>
+      <div class="mt-4 d-flex justify-content-end">
+        <div id="resetUsersListButton" class="btn btn-sm btn-outline-danger">Fetch new Users List from server</div>
+      </div>
       <div class="row">
-        <div class="mt-4">
-          <h1>Basic Users List CRUD App</h1>
+        <div class="mt-2">
+          <h1>Users List CRUD App /w RWD</h1>
           <small>
-            Simple JS app to manage a list of users, fetched from an API, and stored in LocalStorage after each
+            Basic JS app to manage a list of users, fetched from an API, and stored in LocalStorage after each
             change.
           </small>
         </div>
@@ -51,7 +54,7 @@
                     <input type="text" name="userWebsite" id="userWebsite" class="form-control">
                 </div>
               </div>
-              <div class="px-2">
+              <div class="px-1 d-flex justify-content-end">
               <button id="addUserButton" type="button" class="btn btn-md btn-outline-info mt-3">Add new user</button>
               </div>
             </form>
@@ -61,10 +64,18 @@
     </main>
 
     <dialog class="customDialog" id="loadedFromMemory">
-      <h6>The users list was loaded from browser's memory<span>&times;</span></h6>
+      <h6>Users list loaded from browser's memory<span>&times;</span></h6>
     </dialog>
     <dialog class="customDialog" id="loadedFromServer">
-      <h6>No info in browser's memory</br>New list of users was fetched from server.<span>&times;</span></h6>
+      <h6>New list of users <strong>fetched from server.</strong><span>&times;</span></h6>
+    </dialog>
+    <dialog class="customDialog dialog-danger" id="resetUsersList">
+      <div>
+        <h6 class="bg-warning text-white">
+          Are you sure?</br>This will reset current Users List.<span>&times;</span>
+          <button id="confirmReset" class="btn btn-outline-danger btn-sm mt-5">Reset Users List</button>
+        </h6>
+      </div>
     </dialog>
 
     <footer class="container my-3 d-flex justify-content-end">
