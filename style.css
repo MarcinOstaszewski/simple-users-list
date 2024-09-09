@@ -84,3 +84,13 @@ input {
   gap: 1rem;
   justify-content: space-between;
 }
+
+.animate-waiting {
+  font-weight: bold;
+  animation: waiting .5s alternate infinite;
+}
+
+@keyframes waiting {
+  0% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
